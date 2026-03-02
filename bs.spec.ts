@@ -72,4 +72,22 @@ describe("bs", () => {
     const date = new Bs("2082-01-01");
     expect(() => date.setDay(32)).toThrowError();
   });
+
+  it("should add days", () => {
+    const date = new Bs("2082-01-01");
+    date.addDays(1);
+    expect(date.toString()).toBe("2082-01-02");
+  });
+
+  it("should add months", () => {
+    const date = new Bs("2082-01-15");
+    date.addMonths(1);
+    expect(date.toString()).toBe("2082-02-15");
+  });
+
+  it("should add years", () => {
+    const date = new Bs("2081-01-15");
+    date.addYears(1);
+    expect(date.toString()).toBe("2082-01-15");
+  });
 });

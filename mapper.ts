@@ -1,5 +1,5 @@
 import table from "./table.json";
-import { search } from "./utils";
+import { search, smallestlarger } from "./utils";
 
 function buildMapTable(table: number[][]) {
   const mapTable: {
@@ -93,6 +93,48 @@ const mapper = {
     )!;
 
     return cfEntry.cf - cfEntry.total + (cfMonth.cf - cfMonth.total) + day - 1;
+  },
+
+  dateForOffset(offset: number) {
+    const cfEntry = smallestlarger(
+      cfTable.yearly,
+      { year: 0, monthly: [], cf: offset, total: 0 },
+      (e) => e.cf,
+    );
+
+    if (!cfEntry) {
+      throw new Error("Invalid date");
+    }
+
+    offset -= cfEntry.cf - cfEntry.total;
+
+    const year = cfEntry.year;
+    const monthlyCfEntry = cfEntry.monthly.find((e) => e.cf > offset);
+    const month = monthlyCfEntry!.month;
+
+    offset -= monthlyCfEntry!.cf - monthlyCfEntry!.total;
+    const day = offset + 1;
+
+    return { year, month, day };
+  },
+
+  cumOffsetForYear(year: number) {
+    return search(
+      cfTable.yearly,
+      { year, monthly: [], cf: 0, total: 0 },
+      (e) => e.year,
+    )!.cf;
+  },
+
+  cumOffsetForMonth(year: number, month: number) {
+    const cfEntry = search(
+      cfTable.yearly,
+      { year, monthly: [], cf: 0, total: 0 },
+      (e) => e.year,
+    )!;
+
+    return search(cfEntry.monthly, { month, total: 0, cf: 0 }, (e) => e.month)!
+      .cf;
   },
 
   ad,

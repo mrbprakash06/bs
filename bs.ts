@@ -73,4 +73,34 @@ export default class Bs {
     this.day = day;
     this.compute();
   }
+
+  addYears(years: number) {
+    this.year = this.year + years;
+    this.compute();
+  }
+
+  addMonths(months: number) {
+    this.year += Math.floor(months / 12);
+    this.month += months % 12;
+
+    if (this.month > 12) {
+      this.year += 1;
+      this.month %= 12;
+    } else if (this.month < 1) {
+      this.year -= 1;
+      this.month += 12;
+    }
+
+    this.compute();
+  }
+
+  addDays(days: number) {
+    this.offset += days;
+    this.jsDate = new Date(mapper.ad.getTime() + this.offset * 86400000);
+
+    const { year, month, day } = mapper.dateForOffset(this.offset);
+    this.year = year;
+    this.month = month;
+    this.day = day;
+  }
 }
