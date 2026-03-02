@@ -7,23 +7,38 @@ export default class Bs {
   private day: number;
   private jsDate: Date;
 
-  constructor(literal: string) {
-    const regex = /(\d{4})-(\d{2})-(\d{2})/;
-    const match = literal.match(regex);
-
-    if (!match) {
-      throw new Error("Invalid date format");
+  constructor(date?: string | Date) {
+    if (!date) {
+      date = new Date();
     }
 
-    const [, year, month, day] = match;
+    if (date instanceof Date) {
+      date = new Date(date.toISOString().split("T")[0]!);
+      this.jsDate = date;
 
-    this.year = parseInt(year!);
-    this.month = parseInt(month!);
-    this.day = parseInt(day!);
-    this.jsDate = mapper.ad;
-    this.offset = 0;
+      this.offset = (this.jsDate.getTime() - mapper.ad.getTime()) / 86400000;
+      const { year, month, day } = mapper.dateForOffset(this.offset);
+      this.year = year;
+      this.month = month;
+      this.day = day;
+    } else {
+      const regex = /(\d{4})-(\d{2})-(\d{2})/;
+      const match = date.match(regex);
 
-    this.compute();
+      if (!match) {
+        throw new Error("Invalid date format");
+      }
+
+      const [, year, month, day] = match;
+
+      this.year = parseInt(year!);
+      this.month = parseInt(month!);
+      this.day = parseInt(day!);
+      this.jsDate = mapper.ad;
+      this.offset = 0;
+
+      this.compute();
+    }
   }
 
   private compute() {
