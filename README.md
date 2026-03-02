@@ -1,11 +1,34 @@
-# Bs (Bikram Sambat)
+# bs (Bikram Sambat)
 
-A javascript library for Bikram Sambat.
+A JavaScript/TypeScript utility for working with Bikram Sambat (BS) dates.
 
-No validation is done on table at the runtime. It should be clean,
-structured and sorted.
+## Install
 
-This library doesnot handle times and hence timezone. It is upto the user to handle that
-separately.
+```bash
+npm install bs
+```
 
-Even when date object is passed, its time info is ignored.
+## Usage
+
+```ts
+import Bs from "bs";
+
+const date = new Bs("2082-11-18");
+
+date.getYear(); // 2082
+date.getMonth(); // 11
+date.getDay(); // 18
+date.getDayOfWeek(); // 1-7
+
+date.addDays(1);
+date.addMonths(1);
+date.addYears(1);
+
+date.toString(); // YYYY-MM-DD
+date.toJsDate(); // JavaScript Date
+```
+
+## Notes
+
+- Runtime table validation is minimal. Keep `table.json` valid, structured, and sorted.
+- Time and timezone handling are intentionally out of scope.
