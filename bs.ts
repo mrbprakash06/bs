@@ -20,7 +20,13 @@ export default class Bs {
     this.year = parseInt(year!);
     this.month = parseInt(month!);
     this.day = parseInt(day!);
+    this.jsDate = mapper.ad;
+    this.offset = 0;
 
+    this.compute();
+  }
+
+  private compute() {
     if (!mapper.validate(this.year, this.month, this.day)) {
       throw new Error("Invalid date");
     }
@@ -51,5 +57,20 @@ export default class Bs {
 
   getDayOfWeek() {
     return this.jsDate.getDay() + 1;
+  }
+
+  setYear(year: number) {
+    this.year = year;
+    this.compute();
+  }
+
+  setMonth(month: number) {
+    this.month = month;
+    this.compute();
+  }
+
+  setDay(day: number) {
+    this.day = day;
+    this.compute();
   }
 }

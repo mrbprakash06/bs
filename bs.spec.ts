@@ -41,4 +41,35 @@ describe("bs", () => {
     const date = new Bs("2082-11-18");
     expect(date.getDayOfWeek()).toBe(2);
   });
+
+  it("should update year via setter", () => {
+    const date = new Bs("2082-01-01");
+    date.setYear(2082);
+    expect(date.getYear()).toBe(2082);
+    expect(date.toString()).toBe("2082-01-01");
+  });
+
+  it("should update month via setter", () => {
+    const date = new Bs("2082-01-01");
+    date.setMonth(2);
+    expect(date.getMonth()).toBe(2);
+    expect(date.toString()).toBe("2082-02-01");
+  });
+
+  it("should update day via setter", () => {
+    const date = new Bs("2082-01-01");
+    date.setDay(2);
+    expect(date.getDay()).toBe(2);
+    expect(date.toString()).toBe("2082-01-02");
+  });
+
+  it("should throw error when setting invalid month", () => {
+    const date = new Bs("2082-01-01");
+    expect(() => date.setMonth(13)).toThrowError();
+  });
+
+  it("should throw error when setting invalid day", () => {
+    const date = new Bs("2082-01-01");
+    expect(() => date.setDay(32)).toThrowError();
+  });
 });
