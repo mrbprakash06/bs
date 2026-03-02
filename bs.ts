@@ -36,4 +36,20 @@ export default class Bs {
   toJsDate() {
     return this.jsDate;
   }
+
+  getYear() {
+    return this.year;
+  }
+
+  getMonth() {
+    return this.month;
+  }
+
+  getDay() {
+    return this.day;
+  }
+
+  getDayOfWeek() {
+    return this.jsDate.getDay() + 1;
+  }
 }

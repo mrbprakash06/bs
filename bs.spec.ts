@@ -21,4 +21,24 @@ describe("bs", () => {
     expect(date.toJsDate()).toBeInstanceOf(Date);
     expect(date.toJsDate().getTime()).toBe(new Date("2026-03-02").getTime());
   });
+
+  it("should return year via getter", () => {
+    const date = new Bs("2082-11-18");
+    expect(date.getYear()).toBe(2082);
+  });
+
+  it("should return month via getter", () => {
+    const date = new Bs("2082-11-18");
+    expect(date.getMonth()).toBe(11);
+  });
+
+  it("should return day via getter", () => {
+    const date = new Bs("2082-11-18");
+    expect(date.getDay()).toBe(18);
+  });
+
+  it("should return day of week via getter", () => {
+    const date = new Bs("2082-11-18");
+    expect(date.getDayOfWeek()).toBe(2);
+  });
 });
