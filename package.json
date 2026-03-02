@@ -1,5 +1,5 @@
 {
-  "name": "bs",
+  "name": "@mrbprakash06/bs",
   "version": "1.0.0",
   "description": "Bikram Sambat (BS) date utility for JavaScript/TypeScript",
   "main": "dist/index.js",
