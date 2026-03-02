@@ -5,10 +5,7 @@ A javascript library for Bikram Sambat.
 No validation is done on table at the runtime. It should be clean,
 structured and sorted.
 
-## Todo
+This library doesnot handle times and hence timezone. It is upto the user to handle that
+separately.
 
-1. ~~Table validation~~
-2. ~~Table parsing~~
-3. Basic operations such as date validation, date setting.
-   - Parse basic date string
-4. Date operations, and more.
+Even when date object is passed, its time info is ignored.
